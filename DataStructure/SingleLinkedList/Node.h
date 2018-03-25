@@ -6,5 +6,6 @@ class Node
 public:
 	int data;
 	Node *next;	
+	void printNode();
 };
 #endif
