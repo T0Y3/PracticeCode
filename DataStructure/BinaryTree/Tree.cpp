@@ -9,7 +9,7 @@ Tree::Tree()
 }
 
 
-ListTree::~ListTree()
+Tree::~Tree()
 {  
     m_pRoot->delNode();  
 }  

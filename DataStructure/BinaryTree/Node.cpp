@@ -55,7 +55,7 @@ void Node::delNode(){
 
 void Node::Traverse()
 {
-	cout<<this->index<<" "<<this->name<<" "<<this->phone
+	cout<<this->index<<" "<<this->name<<" "<<this->phone<<endl;
   
     if(this->pLChild != NULL)  
         this->pLChild->Traverse();  

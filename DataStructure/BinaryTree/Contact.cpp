@@ -8,16 +8,14 @@ void deleteContact();
 int  findContact();
 void modifyContact();
 void showContact();
-void Exit(); 
+
 
 int indexNode = 0;
-int nodenum=0;
 int childside=0;
+Tree *tree= new Tree();
 
 int main()
 {
-
-	Tree *tree = new Tree();  
 	int choice;
 	while(1)
 	{
@@ -42,9 +40,9 @@ int main()
 			case 5:
 				showContact();break;
 			case 6:
-				Exit();
+				delete tree;return 0;
 			default:
-				cout<<"Something Error!!!"
+				cout<<"Something Error!!!";
 		}
 	}
 }
@@ -61,14 +59,13 @@ void addContact()
 	nodeadd->name = strname;
 	nodeadd->phone = strphone;
 	nodeadd->index = indexNode;
-	tree->addNode(nodenum,childside,nodeadd);
-	cout<<"Success!!"<<endl
+	tree->addNode(indexNode,childside,nodeadd);
+	cout<<"Success!!"<<endl;
 
 	if(childside==1)
 		childside=0;
 	else
 		childside=1;
-	nodenum++;
 	indexNode++;
 }
 
@@ -80,10 +77,15 @@ void deleteContact()
 	Node *currNode = new Node;
 	cin>>indexNode;
 	tree->delNode(indexNode,currNode);
-	cout<<"Delete the contact: "<<currNode->index<<" "
-	<<currNode->name<<" "<<currNode->phone<<endl;
+	cout<<"Delete the contact: "
+	<<currNode->index
+	<<" "
+	<<currNode->name
+	<<" "
+	<<currNode->phone
+	<<endl;
 	delete currNode;
-	cout<<"Success!!"<<endl
+	cout<<"Success!!"<<endl;
 }
 
 
@@ -92,22 +94,19 @@ int findContact()
 	cout<<"Please the name"<<endl;
 	string strfind;
 	cin>>strfind;
-	while(this->pLChild!=NULL)
-		if(this->pLChild->name==strfind)
+	for(int i=0;i<indexNode;i++)
+		if(tree->searchNode(i)->name==strfind)
 			{
-				cout<<"I find it :"<<this->index<<" "
-				<<this->name<<" "<<this->phone<<endl;
-				return this->pLChild->index;
+				cout<<"I find it :"
+				<<tree->searchNode(i)->index
+				<<" "
+				<<tree->searchNode(i)->name
+				<<" "
+				<<tree->searchNode(i)->phone
+				<<endl;
+				return i;
 			}
 
-	while(this->pRChild!=NULL)
-		if(this->pRChild->name==strfind)
-			{
-				cout<<"I Fought it :"<<this->index<<" "
-				<<this->name<<" "<<this->phone<<endl;				
-				return this->pRChild->index;
-			}
-	cout<<"This contact does not exist!"
 	return -1;
 }
 
@@ -116,6 +115,8 @@ void modifyContact()
 {
 	cout<<"Enter the number of the contact"<<endl;
 	int nodeNum;
+	string nameMod;
+	string phoneMod;
 	cin>>nodeNum;
 	Node* temp = new Node;
 	temp = tree->searchNode(nodeNum);
@@ -129,10 +130,4 @@ void modifyContact()
 void showContact()
 {
 	tree->Traverse();
-}
-
-void Exit()
-{
-	delete tree;
-	exit();
 }
