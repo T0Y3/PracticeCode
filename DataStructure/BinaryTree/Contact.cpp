@@ -11,6 +11,7 @@ void showContact();
 
 
 int indexNode = 0;
+int numNode = 0;
 int childside=0;
 Tree *tree= new Tree();
 
@@ -59,11 +60,15 @@ void addContact()
 	nodeadd->name = strname;
 	nodeadd->phone = strphone;
 	nodeadd->index = indexNode;
-	tree->addNode(indexNode,childside,nodeadd);
+	tree->addNode(numNode,childside,nodeadd);
 	cout<<"Success!!"<<endl;
 
+	delete nodeadd;
 	if(childside==1)
-		childside=0;
+		{
+			childside=0;
+			numNode++;
+		}
 	else
 		childside=1;
 	indexNode++;
@@ -94,7 +99,7 @@ int findContact()
 	cout<<"Please the name"<<endl;
 	string strfind;
 	cin>>strfind;
-	for(int i=0;i<indexNode;i++)
+	for(int i=0;i<=indexNode;i++)
 		if(tree->searchNode(i)->name==strfind)
 			{
 				cout<<"I find it :"
@@ -121,8 +126,10 @@ void modifyContact()
 	Node* temp = new Node;
 	temp = tree->searchNode(nodeNum);
 	cout<<"Enter the new name"<<endl;
+	cin>>nameMod;
 	temp->name = nameMod;
 	cout<<"Enter the new phone"<<endl;
+	cin>>phoneMod;
 	temp->phone = phoneMod;
 	cout<<"Success!!!"<<endl;
 }

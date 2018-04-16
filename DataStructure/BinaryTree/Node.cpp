@@ -42,7 +42,6 @@ void Node::delNode(){
         this->pLChild->delNode();  
     if(this->pRChild != NULL)  
         this->pRChild->delNode();  
-    /****/  
     if(this->pParent != NULL){  
         if(this->pParent->pLChild == this)  
             this->pParent->pLChild = NULL;  
